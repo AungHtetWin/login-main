@@ -40,7 +40,6 @@
        <?php echo $errormessage ?>
      </div>
      <?php } ?> 
-    <h2 class="font-weight-normal mb-3">Please Log in</h2>
     <form action="login.php" method="post">
         <div class="form-group mt-3">
             <label for="email">Email address</label>
