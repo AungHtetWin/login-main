@@ -19,8 +19,8 @@
         else if($email != "admin@admin.com" && $password == "secret"){
             $errormessage="Invalid Email Address";
         }
-        else if($email == "" && $password == ""){
-            $errormessage="Enter Email Address and password!";
+        else if($email != "admin@admin.com" && $password != "secret"){
+            $errormessage="Invalid Email Address and Password";
         }
     }    
  $auth = isset($_SESSION['auth']);
