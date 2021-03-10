@@ -2,24 +2,27 @@
  session_start();
     $email = "";
     $password = "";
-
-    if(isset($_POST['email'])){
+     if(isset($_POST['email'])){
         $email = $_POST['email'];
     }
     if(isset($_POST['password'])){
-        $password = $_POST['password'];
+       $password = $_POST['password'];
     }
     $errormessage="";
- 
- if($email == "admin@admin.com" && $password == "secret") {
-    $_SESSION['auth'] = true;
- }
- else if($email == "admin@admin.com" && $password != "secret"){
-    $errormessage="Invalid Password";
- }
- else if($email != "admin@admin.com" && $password == "secret"){
-    $errormessage="Invalid Email";
-}
+    if(isset($_POST['submit'])){    
+        if($email == "admin@admin.com" && $password == "secret") {
+            $_SESSION['auth'] = true;
+        }
+        else if($email == "admin@admin.com" && $password != "secret"){
+            $errormessage="Invalid Password";
+        }
+        else if($email != "admin@admin.com" && $password == "secret"){
+            $errormessage="Invalid Email Address";
+        }
+        else if($email == "" && $password == ""){
+            $errormessage="Enter Email Address and password!";
+        }
+    }    
  $auth = isset($_SESSION['auth']);
 ?>
 <!doctype html>
