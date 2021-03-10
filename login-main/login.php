@@ -39,7 +39,7 @@
   } else { ?>
   <div class="container col-md-3 p-3 mt-5">
     <?php if($errormessage !="") { ?>
-     <div class="alert alert-warning text-center" role="alert">
+     <div class="alert alert-danger text-center" role="alert">
        <?php echo $errormessage ?>
      </div>
      <?php } ?> 
