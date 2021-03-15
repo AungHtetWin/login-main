@@ -1,5 +1,6 @@
 <?php
  session_start();
+ include("connectdb.php");
     $email = "";
     $password = "";
      if(isset($_POST['email'])){
@@ -9,19 +10,22 @@
        $password = $_POST['password'];
     }
     $errormessage="";
-    if(isset($_POST['submit'])){    
-        if($email == "admin@admin.com" && $password == "secret") {
-            $_SESSION['auth'] = true;
-        }
-        else if($email == "admin@admin.com" && $password != "secret"){
-            $errormessage="Invalid Password";
-        }
-        else if($email != "admin@admin.com" && $password == "secret"){
-            $errormessage="Invalid Email Address";
-        }
-        else if($email != "admin@admin.com" && $password != "secret"){
-            $errormessage="Invalid Email Address and Password";
-        }
+    if(isset($_POST['submit'])){   
+        $result = mysqli_query($conn, "SELECT * FROM user"); 
+         while($row = mysqli_fetch_assoc($result)): 
+            if($email == $row['email'] && $password == $row['password']) {
+                $_SESSION['auth'] = true;
+            }
+            else if($email != $row['email'] && $password == $row['password']) {
+                $errormessage="Incorrect Email Address";
+            }
+            else if($email == $row['email'] && $password != $row['password']) {
+                $errormessage="Incorrect Password";
+            }
+            else{
+                $errormessage="Invalid Email Address and Password";
+            }
+         endwhile;
     }    
  $auth = isset($_SESSION['auth']);
 ?>
@@ -52,7 +56,8 @@
             <label for="password">Password</label>
             <input type="password" class="form-control form-control-sm col-12" name="password" id="password">
         </div>
-       <button class="btn btn-lg btn-primary btn-block" type="submit" name="submit" id="submit">Login</button>
+        <a href="register.php">Register Here?</a>
+       <button class="btn mt-3 btn-lg btn-primary btn-block" type="submit" name="submit" id="submit">Login</button>
     </form>
   </div>
  <?php } ?>
